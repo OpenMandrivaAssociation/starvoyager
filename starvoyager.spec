@@ -1,23 +1,22 @@
 %define name starvoyager
 %define version 0.4.4
 
-Summary:       A space combat and exploration game
-Name:          %{name}
-Version:       %{version}
-Release:       %mkrel 3
-Source0:       %{name}-%{version}.tar.bz2
+Summary:	A space combat and exploration game
+Name:		%{name}
+Version:	%{version}
+Release:	%mkrel 4
+Source0:	%{name}-%{version}.tar.bz2
 %{!?_without_newgfx:Source1: sv_newgfx.tar.bz2}
 %{!?_with_startrek:Source2: starvoyager-notrek.tar.bz2}
-Source10:      %{name}16.png.bz2
-Source11:      %{name}32.png.bz2
-Source12:      %{name}48.png.bz2
-Patch0:        %{name}-%{version}-SDLfix.diff.bz2
-License:       BSD
-Group:         Games/Strategy
-
-Url: 		   http://starvoyager.bluesky.me.uk/
-BuildRoot:     %{_tmppath}/%{name}-buildroot
-BuildRequires: SDL-devel SDL_net-devel
+Source10:	%{name}16.png.bz2
+Source11:	%{name}32.png.bz2
+Source12:	%{name}48.png.bz2
+Patch0:		%{name}-%{version}-SDLfix.diff
+License:	BSD
+Group:		Games/Strategy
+URL:		http://starvoyager.bluesky.me.uk/
+BuildRoot:	%{_tmppath}/%{name}-buildroot
+BuildRequires:	SDL-devel SDL_net-devel
 
 %description
 Star Voyager is a space combat and exploration game set in 
@@ -30,7 +29,7 @@ Star Voyager is a space combat and exploration game set in
 %{!?_without_newgfx:%setup -q -T -D -a 1 -n %{name}/data}
 %{!?_with_startrek:%setup -q -T -D -b 2 -n %{name}}
 %setup -q -T -D -n %{name}
-%patch -p 1
+%patch -p1
 
 # Fix typo (the file is referred to everywhere by the proper name)
 cp -f LICENCE LICENSE
@@ -50,14 +49,19 @@ rm -rf $RPM_BUILD_ROOT
 #     bzip2 starvoyager$size.png; 
 #   done
 
-mkdir -p $RPM_BUILD_ROOT/%{_menudir}
-echo '?package(%{name}): \
-needs=x11 \
-icon=%{name}.png \
-section="Amusement/Strategy" \
-title="Star Voyager" \
-longtitle="Space Exploration Game" \
-command="%{_gamesbindir}/%{name} -x"' > $RPM_BUILD_ROOT/%{_menudir}/%{name}
+install -d -m 755 %{buildroot}%{_datadir}/applications
+cat >  %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=%{title}
+Comment=%{longtitle}
+Exec=%{_gamesbindir}/%{name}
+Icon=%{name}
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=Game;StrategyGame
+EOF
 
 mkdir -p $RPM_BUILD_ROOT/{%{_miconsdir},%{_iconsdir},%{_liconsdir}}
 bzcat %{SOURCE10} > $RPM_BUILD_ROOT/%{_miconsdir}/%{name}.png
@@ -85,7 +89,8 @@ rm -rf $RPM_BUILD_ROOT
 %{!?_with_startrek:%doc README.names}
 %{_gamesbindir}/%{name}
 %{_gamesdatadir}/%{name}/
-%{_menudir}/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
+
