@@ -4,7 +4,7 @@
 Summary:	A space combat and exploration game
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 4
+Release:	%mkrel 5
 Source0:	%{name}-%{version}.tar.bz2
 %{!?_without_newgfx:Source1: sv_newgfx.tar.bz2}
 %{!?_with_startrek:Source2: starvoyager-notrek.tar.bz2}
@@ -52,15 +52,14 @@ rm -rf $RPM_BUILD_ROOT
 install -d -m 755 %{buildroot}%{_datadir}/applications
 cat >  %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
-Name=%{title}
-Comment=%{longtitle}
+Name=Star Voyager
+Comment=Space Exploration Game
 Exec=%{_gamesbindir}/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=false
-Categories=Game;StrategyGame
+Categories=Game;StrategyGame;
 EOF
 
 mkdir -p $RPM_BUILD_ROOT/{%{_miconsdir},%{_iconsdir},%{_liconsdir}}
@@ -93,4 +92,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
-
