@@ -15,6 +15,7 @@ Patch0:		%{name}-%{version}-SDLfix.diff
 License:	BSD
 Group:		Games/Strategy
 URL:		http://starvoyager.bluesky.me.uk/
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	SDL-devel SDL_net-devel
 
 %description
