@@ -11,7 +11,6 @@ Source0:	%{name}-%{version}.tar.bz2
 Source10:	%{name}16.png.bz2
 Source11:	%{name}32.png.bz2
 Source12:	%{name}48.png.bz2
-Patch0:		%{name}-%{version}-SDLfix.diff
 License:	BSD
 Group:		Games/Strategy
 URL:		http://starvoyager.bluesky.me.uk/
@@ -29,7 +28,6 @@ Star Voyager is a space combat and exploration game set in
 %{!?_without_newgfx:%setup -q -T -D -a 1 -n %{name}/data}
 %{!?_with_startrek:%setup -q -T -D -b 2 -n %{name}}
 %setup -q -T -D -n %{name}
-%patch0 -p1
 
 # Fix typo (the file is referred to everywhere by the proper name)
 cp -f LICENCE LICENSE
@@ -72,16 +70,6 @@ rm -rf $RPM_BUILD_ROOT/usr/share/doc/%{name}
 
 # Avoid potential problems with Paramount
 %{!?_with_startrek:sed -i $RPM_BUILD_ROOT/%{_gamesdatadir}/%{name}/{alliances.svd,equip.svd,ships.svd} -e"s/Starfleet/Human/" -e"s/Klingon/Lobsterman/" -e"s/Borg/Cyborg/" -e"s/Dominion/Shapechanger/" -e"s/Romulan/Pointears/" -e"s/Jem'Hadar/Junky/" -e"s/phaser/laser/" -e"s/Polaron Phaser/Polarized laser/" -e"s/Bird of Prey/Falcon/" -e"s/V'orcha/Beast/" -e"s/Defiant/Speedy/" -e"s/Collective/Cyborg/" -e"s/isruptor/isintegrator/" -e"s/Photon torpedo/Energy-torpedo/" -e"s/isrupter/isintegrator/"}
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
