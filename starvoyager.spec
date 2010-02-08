@@ -29,7 +29,7 @@ Star Voyager is a space combat and exploration game set in
 %{!?_without_newgfx:%setup -q -T -D -a 1 -n %{name}/data}
 %{!?_with_startrek:%setup -q -T -D -b 2 -n %{name}}
 %setup -q -T -D -n %{name}
-%patch -p1
+%patch0 -p1
 
 # Fix typo (the file is referred to everywhere by the proper name)
 cp -f LICENCE LICENSE
