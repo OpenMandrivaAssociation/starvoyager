@@ -4,7 +4,7 @@
 Summary:	A space combat and exploration game
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 9
+Release:	%mkrel 10
 Source0:	%{name}-%{version}.tar.bz2
 %{!?_without_newgfx:Source1: sv_newgfx.tar.bz2}
 %{!?_with_startrek:Source2: starvoyager-notrek.tar.bz2}
