@@ -13,7 +13,7 @@ Source11:	%{name}32.png.bz2
 Source12:	%{name}48.png.bz2
 License:	BSD
 Group:		Games/Strategy
-URL:		http://starvoyager.bluesky.me.uk/
+URL:		https://starvoyager.bluesky.me.uk/
 BuildRoot:	%{_tmppath}/%{name}-buildroot
 BuildRequires:	SDL-devel SDL_net-devel
 
