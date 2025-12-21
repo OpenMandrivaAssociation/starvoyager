@@ -15,6 +15,7 @@ License:	BSD
 Group:		Games/Strategy
 URL:		https://starvoyager.bluesky.me.uk/
 BuildRoot:	%{_tmppath}/%{name}-buildroot
+BuildRequires:	make
 BuildRequires:	SDL-devel SDL_net-devel
 
 %description
